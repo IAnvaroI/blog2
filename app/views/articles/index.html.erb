@@ -1,5 +1,16 @@
 <h1>Articles</h1>
 
+<%= form_with method: :post, model: @article do |form| %>
+  <div>
+    <%= form.label :search_field, "Search by full title" %><br>
+    <%= form.text_field :search_field %>
+  </div>
+  <p id="error"><%= flash[:error] %></p>
+  <div>
+    <%= form.submit "Search"%>
+  </div>
+<% end %>
+
 Our blog has <%= Article.public_count %> articles and counting!
 
 <ul>

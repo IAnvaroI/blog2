@@ -42,6 +42,14 @@ class ArticlesController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    @article = Article.find_by_title(params[:search_field])
+    if @article == nil
+      redirect_to root_path, flash: { error: "There are no article with such title!" }
+    end
+      @title = params[:search_field]
+  end
+
   private
   def article_params
     params.require(:article).permit(:title, :body, :status)
