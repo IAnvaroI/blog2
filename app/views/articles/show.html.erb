@@ -2,6 +2,12 @@
 
 <p><%= @article.body %></p>
 
+<% if @article.images.attached? %>
+  <% @article.images.each do |image| %>
+    <img src="<%=url_for(image) %>" alt="">
+  <% end %>
+<%end %>
+
 <ul>
   <li><%= link_to "Edit", edit_article_path(@article) %></li>
   <li><%= link_to "Destroy", article_path(@article),
@@ -15,4 +21,15 @@
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
 
+<h2>Add an image:</h2>
+<%= form_with model: @article do |form| %>
+<div>
+  <%= form.label :images %><br>
+  <%= form.file_field :images, multiple: true  %>
+</div>
+
+<div>
+  <%= form.submit %>
+</div>
+<%end %>
 <%= link_to "Home", root_path %>
